@@ -32,3 +32,10 @@ def get_device(device_name: str):
         return device
     raise HTTPException(status_code=404, detail="Device not found") 
 
+
+@app.post("/devices")
+def add_device(device: Device):
+    new_device = device.model_dump()
+    devices.insert_one(new_device)
+    new_device.pop("_id")
+    return new_device
