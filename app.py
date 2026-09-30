@@ -18,3 +18,8 @@ class Device(BaseModel):
     room: str
     temp: float
     online: bool
+
+@app.get("/devices")
+def get_devices():
+    device_list = list(devices.find({}, {"_id": 0}))
+    return device_list
